@@ -4,7 +4,7 @@ from models.BayramogluetAl2017Model import BayramogluetAl2017Model
 from models.FCModel import FCModel
 from models.transfer_learning_resnet50 import TlResnet50
 
-EPOCHS = 7
+EPOCHS = 100
 BATCH_SIZE = 15
 
 RES_AUG = '384_flip'  # '1920_no', '384_flip', '192_rotate'
@@ -17,8 +17,8 @@ RES = '384'
 X_test = np.load('array_data/' + RES + '_X_test.npy')
 Y_test = np.load('array_data/' + RES + '_Y_test.npy')
 
-# model = FCModel(X_train[0].shape)
-model = TlResnet50(X_train[0].shape)
+model = FCModel(X_train[0].shape)
+# model = TlResnet50(X_train[0].shape)
 # model = GaoetAl2017Model(X_train[0].shape)
 # model = BayramogluetAl2017Model(X_train[0].shape)
 

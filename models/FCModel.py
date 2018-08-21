@@ -9,8 +9,9 @@ class FCModel(KerasModel):
 
     def build(self, input_shape):
         X_input = Input(input_shape)
-        X = Dense(3, activation='sigmoid')(X_input)
-        X = Flatten()(X)
+        X = Flatten()(X_input)
+        X = Dense(128, activation='sigmoid')(X)
+        X = Dense(4, activation='sigmoid')(X)
         X = Dense(1, activation='sigmoid')(X)
         model = Model(inputs=X_input, outputs=X, name='FcModel')
         return model
