@@ -1,0 +1,6 @@
+1. Best so far on vlidation set:
+BayramogluetAl2017Model, epochs=10, batch_size=15, acc=0.699
+* SHould test the other paper with bn
+
+
+2. After data augmentation, using BayramogluetAl2017Model, I got 0.8125 acc on the validation set (mb size = 30, epochs = 10, resolution =(384, 384))
