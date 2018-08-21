@@ -11,7 +11,9 @@ class FCModel(KerasModel):
         X_input = Input(input_shape)
         X = Flatten()(X_input)
         X = Dense(128, activation='sigmoid')(X)
-        X = Dense(4, activation='sigmoid')(X)
+        X = Dropout(0.3)(X)
+        X = Dense(64, activation='sigmoid')(X)
+        X = Dropout(0.3)(X)
         X = Dense(1, activation='sigmoid')(X)
         model = Model(inputs=X_input, outputs=X, name='FcModel')
         return model
