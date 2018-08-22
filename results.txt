@@ -4,3 +4,6 @@ BayramogluetAl2017Model, epochs=10, batch_size=15, acc=0.699
 
 
 2. After data augmentation, using BayramogluetAl2017Model, I got 0.8125 acc on the validation set (mb size = 30, epochs = 10, resolution =(384, 384))
+
+3. Gao et al 2017, epochs = 30 batch_size = 30, data = 192_rotate, activations = relu, relu, sigmoid instead of tanh, valid_acc = 0.83!! (with overfit)
+4. Bayramoglu et al, epochs = 10 batch_size = 30, data = 192,  activations = relu, relu, sigmoid, no batch_norm, valid_acc = 0.78! (no overfit)

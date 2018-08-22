@@ -12,13 +12,10 @@ class BayramogluetAl2017Model(KerasModel):
     def build(self, input_shape):
         X_input = Input(input_shape)
         X = Conv2D(32, (5, 5), strides=(1, 1))(X_input)
-        X = BatchNormalization(axis=3)(X)
         X = MaxPooling2D((3, 3))(X)
         X = Conv2D(32, (5, 5), strides=(1, 1), activation='relu')(X)
-        X = BatchNormalization(axis=3)(X)
         X = AveragePooling2D((3, 3))(X)
         X = Conv2D(64, (5, 5), strides=(1, 1), activation='relu')(X)
-        X = BatchNormalization(axis=3)(X)
         X = AveragePooling2D((3, 3))(X)
         X = Flatten()(X)
         X = Dense(1, activation='sigmoid')(X)
