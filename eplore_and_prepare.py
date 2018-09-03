@@ -1,10 +1,11 @@
 from os import listdir
-import matplotlib.pyplot as plt
 import PIL
 from PIL import Image
 from random import random
 import numpy as np
+import matplotlib.pyplot as plt
 
+plt.style.use('ggplot2')
 
 MTs = []
 WTs = []
@@ -47,15 +48,14 @@ for MT_p, WT_p in zip(listdir('DL_task/MT/'), listdir('DL_task/WT/')):
         except:
             WT_avg_A.append(-1)
 
-
 ## Modes
 plt.subplot(2, 1, 1)
-plt.hist(MT_modes, 2)
+plt.bar(x=range(2), height=[MT_modes.count('RGB'), MT_modes.count('RGBA')], tick_label=('RGB', 'RGBA'))
 plt.title('Modes')
 plt.ylabel('MT')
 
 plt.subplot(2, 1, 2)
-plt.hist(WT_modes, 2)
+plt.bar(x=range(2), height=[WT_modes.count('RGB'), WT_modes.count('RGBA')], tick_label=('RGB', 'RGBA'))
 plt.xlabel('mode')
 plt.ylabel('WT')
 
@@ -63,12 +63,12 @@ plt.show()
 
 ## Size
 plt.subplot(2, 1, 1)
-plt.hist(MT_sizes[0], 5)
+plt.hist(MT_sizes[0], bins=40, range=(0, 4000))
 plt.title('Picture size')
 plt.ylabel('MT')
 
 plt.subplot(2, 1, 2)
-plt.hist(WT_sizes[0], 5)
+plt.hist(WT_sizes[0], bins=40, range=(0, 4000))
 plt.xlabel('size')
 plt.ylabel('MT')
 
@@ -76,12 +76,25 @@ plt.show()
 
 ## Red
 plt.subplot(2, 1, 1)
-plt.hist(MT_avg_R, bins=10, range = (0.8,2.5))
+plt.hist(MT_avg_R, bins=255, range=(0, 255))
 plt.title('RED')
 plt.ylabel('MT')
 
 plt.subplot(2, 1, 2)
-plt.hist(WT_avg_R, bins=10, range = (0.8,2.5))
+plt.hist(WT_avg_R, bins=255, range=(0, 255))
+plt.xlabel('avg')
+plt.ylabel('MT')
+
+plt.show()
+
+## Red zoom
+plt.subplot(2, 1, 1)
+plt.hist(MT_avg_R, bins=60, range=(0, 6))
+plt.title('RED_zoom_in')
+plt.ylabel('MT')
+
+plt.subplot(2, 1, 2)
+plt.hist(WT_avg_R, bins=60, range=(0, 6))
 plt.xlabel('avg')
 plt.ylabel('MT')
 
@@ -89,12 +102,25 @@ plt.show()
 
 ## Green
 plt.subplot(2, 1, 1)
-plt.hist(MT_avg_G, bins=10, range = (0.8,2.5))
+plt.hist(MT_avg_G, bins=255, range=(0, 255))
 plt.title('GREEN')
 plt.ylabel('MT')
 
 plt.subplot(2, 1, 2)
-plt.hist(WT_avg_G, bins=10, range = (0.8,2.5))
+plt.hist(WT_avg_G, bins=255, range=(0, 255))
+plt.xlabel('avg')
+plt.ylabel('MT')
+
+plt.show()
+
+## Green_zoom
+plt.subplot(2, 1, 1)
+plt.hist(MT_avg_G, bins=60, range=(0, 6))
+plt.title('GREEN_zoom')
+plt.ylabel('MT')
+
+plt.subplot(2, 1, 2)
+plt.hist(WT_avg_G, bins=60, range=(0, 6))
 plt.xlabel('avg')
 plt.ylabel('MT')
 
@@ -102,48 +128,61 @@ plt.show()
 
 ## Blue
 plt.subplot(2, 1, 1)
-plt.hist(MT_avg_B, bins=10, range = (0.8,2.5))
+plt.hist(MT_avg_B, bins=255, range=(0, 255))
 plt.title('BLUE')
 plt.ylabel('MT')
 
 plt.subplot(2, 1, 2)
-plt.hist(WT_avg_B, bins=10, range = (0.8,2.5))
+plt.hist(WT_avg_B, bins=255, range=(0, 255))
 plt.xlabel('avg')
 plt.ylabel('MT')
 
 plt.show()
 
+## Blue zoom
+plt.subplot(2, 1, 1)
+plt.hist(MT_avg_B, bins=60, range=(0, 6))
+plt.title('BLUE_zoom')
+plt.ylabel('MT')
+
+plt.subplot(2, 1, 2)
+plt.hist(WT_avg_B, bins=60, range=(0, 6))
+plt.xlabel('avg')
+plt.ylabel('MT')
+
+plt.show()
 
 ## Alpha
 plt.subplot(2, 1, 1)
-plt.hist(MT_avg_A, bins=40, range = (-2, 256))
+plt.hist(MT_avg_A, bins=258, range=(-2, 256))
 plt.title('ALPHA')
 plt.ylabel('MT')
 
 plt.subplot(2, 1, 2)
-plt.hist(WT_avg_A, bins=40, range = (-2, 256))
+plt.hist(WT_avg_A, bins=258, range=(-2, 256))
 plt.xlabel('avg')
 plt.ylabel('MT')
 
 plt.show()
-
 
 X_train = {'1920_no': [], '384_flip': [], '192_rotate': []}
 Y_train = {'1920_no': [], '384_flip': [], '192_rotate': []}
 X_valid = {'1920_no': [], '384_flip': [], '192_rotate': []}
 Y_valid = {'1920_no': [], '384_flip': [], '192_rotate': []}
-resolutions = [int(3840/2), int(3840 / 10), int(3840 / 20)]
+resolutions = [int(3840 / 2), int(3840 / 10), int(3840 / 20)]
 augmentations = ['no', 'flip', 'rotate']
-#types = ['RGB', 'RGBA']
+# types = ['RGB', 'RGBA']
 res_aug_maps = {'1920_no': [resolutions[0], augmentations[0]],
                 '384_flip': [resolutions[1], augmentations[1]],
                 '192_rotate': [resolutions[2], augmentations[2]]}
+
 
 def appends(M, W, x, y):
     x.append(M)
     y.append(1)
     x.append(W)
     y.append(0)
+
 
 def augmenting(img, type):
     imgs = []
@@ -180,7 +219,6 @@ for res_aug in res_aug_maps.keys():
             for MT_a, WT_a in zip(MT_augments, WT_augments):
                 appends(MT_a, WT_a, X_valid[res_aug], Y_valid[res_aug])
 
-
 for res_aug in res_aug_maps.keys():
     xtrain = np.array(X_train[res_aug])
     xvalid = np.array(X_valid[res_aug])
@@ -188,11 +226,10 @@ for res_aug in res_aug_maps.keys():
     yvalid = np.array(Y_valid[res_aug])
     xtrain = xtrain / 255.
     xvalid = xvalid / 255.
-    np.save(res_aug+'_X_train', xtrain)
-    np.save(res_aug+'_X_valid', xvalid)
-    np.save(res_aug+'_Y_train', ytrain)
-    np.save(res_aug+'_Y_valid', yvalid)
-
+    np.save(res_aug + '_X_train', xtrain)
+    np.save(res_aug + '_X_valid', xvalid)
+    np.save(res_aug + '_Y_train', ytrain)
+    np.save(res_aug + '_Y_valid', yvalid)
 
 X_test = {'1920': [], '384': [], '192': []}
 Y_test = {'1920': [], '384': [], '192': []}
@@ -211,5 +248,5 @@ for res in resolutions:
     xtest = np.array(X_test[str(res)])
     ytest = np.array(Y_test[str(res)])
     xtest = xtrain / 255.
-    np.save(str(res)+'_X_test', xtest)
-    np.save(str(res)+'_Y_test', ytest)
+    np.save(str(res) + '_X_test', xtest)
+    np.save(str(res) + '_Y_test', ytest)

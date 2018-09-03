@@ -5,7 +5,7 @@ from models.FCModel import FCModel
 from models.transfer_learning_resnet50 import TlResnet50
 from models.transfer_learning_vgg16 import TlVGG16
 
-EPOCHS = 10
+EPOCHS = 30
 BATCH_SIZE = 30
 
 RES_AUG = '192_rotate'  # '1920_no', '384_flip', '192_rotate'
@@ -20,8 +20,8 @@ Y_test = np.load('array_data/' + RES + '_Y_test.npy')
 
 # model = FCModel(X_train[0].shape)
 # model = TlResnet50(X_train[0].shape)
-model = TlVGG16(X_train[0].shape)
-# model = GaoetAl2017Model(X_train[0].shape)
+# model = TlVGG16(X_train[0].shape)
+model = GaoetAl2017Model(X_train[0].shape)
 # model = BayramogluetAl2017Model(X_train[0].shape)
 
 model.compile()
