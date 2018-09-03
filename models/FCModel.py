@@ -6,8 +6,7 @@ import numpy as np
 
 class FCModel(KerasModel):
     def __init__(self, input_shape, layers_num):
-        super(FCModel, self).__init__(input_shape)
-        self.layers_num = layers_num
+        super(FCModel, self).__init__(input_shape, layers_num)
 
     def build(self, input_shape):
         X_input = Input(input_shape)

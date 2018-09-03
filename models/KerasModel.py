@@ -1,7 +1,10 @@
 from keras import optimizers
+
+
 class KerasModel(object):
 
-    def __init__(self, input_shape):
+    def __init__(self, input_shape, layers_num=0):
+        self.layers_num = layers_num
         self.model = self.build(input_shape)
 
     def build(self, input_shape):
@@ -23,8 +26,7 @@ class KerasModel(object):
         return preds
 
     def save_model_weights(self, name):
-        self.model.save_weights('Weights/'+name)
+        self.model.save_weights('Weights/' + name)
 
     def load_model_weights(self, name):
-        self.model.load_weights('Weights/'+name, by_name=False)
-
+        self.model.load_weights('Weights/' + name, by_name=False)

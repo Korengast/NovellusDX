@@ -18,10 +18,10 @@ RES = '192'
 X_test = np.load('array_data/' + RES + '_X_test.npy')
 Y_test = np.load('array_data/' + RES + '_Y_test.npy')
 
-# model = FCModel(X_train[0].shape)
+model = FCModel(X_train[0].shape, layers_num=2)
 # model = TlResnet50(X_train[0].shape)
 # model = TlVGG16(X_train[0].shape)
-model = GaoetAl2017Model(X_train[0].shape)
+# model = GaoetAl2017Model(X_train[0].shape)
 # model = BayramogluetAl2017Model(X_train[0].shape)
 
 model.compile()
