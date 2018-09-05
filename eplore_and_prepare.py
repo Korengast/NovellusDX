@@ -5,7 +5,7 @@ from random import random
 import numpy as np
 import matplotlib.pyplot as plt
 
-plt.style.use('ggplot2')
+plt.style.use('ggplot')
 
 MTs = []
 WTs = []

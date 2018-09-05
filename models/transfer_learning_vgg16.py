@@ -1,5 +1,5 @@
 from keras.applications.vgg16 import VGG16
-from keras.layers import Dense, Flatten
+from keras.layers import Dense, Flatten, Dropout
 from keras.models import Model
 
 from models.KerasModel import KerasModel
@@ -14,7 +14,9 @@ class TlVGG16(KerasModel):
         last_layer = tl_model.get_layer('block5_pool').output
         X = Flatten()(last_layer)
         X = Dense(128, activation='relu')(X)
+        X = Dropout(0.2)(X)
         X = Dense(128, activation='relu')(X)
+        X = Dropout(0.2)(X)
         X = Dense(1, activation='sigmoid', name='output')(X)
 
         model = Model(inputs=tl_model.input, outputs=X)

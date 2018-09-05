@@ -11,12 +11,10 @@ class FCModel(KerasModel):
     def build(self, input_shape):
         X_input = Input(input_shape)
         X = Flatten()(X_input)
-        for l in range(self.layers_num-1):
-            out = np.power(2, 2*(l+1))
+        for l in range(self.layers_num - 1, 0, -1):
+            out = np.power(2, 2 * (l + 1))
             X = Dense(out, activation='sigmoid')(X)
-            X = Dropout(0.1)(X)
+            X = Dropout(0.2)(X)
         X = Dense(1, activation='sigmoid')(X)
-        model = Model(inputs=X_input, outputs=X, name='FcModel_'+str(self.layers_num))
+        model = Model(inputs=X_input, outputs=X, name='FcModel_' + str(self.layers_num))
         return model
-
-

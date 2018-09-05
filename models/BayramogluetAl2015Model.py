@@ -5,9 +5,9 @@ from keras.models import Model
 
 # Bayramoglu, N., Kannala, J., & Heikkilä, J. (2015, November). Human epithelial type 2 cell classification with convolutional neural networks. In Bioinformatics and Bioengineering (BIBE), 2015 IEEE 15th International Conference on (pp. 1-6). IEEE.‏
 
-class BayramogluetAl2017Model(KerasModel):
+class BayramogluetAl2015Model(KerasModel):
     def __init__(self, input_shape):
-        super(BayramogluetAl2017Model, self).__init__(input_shape)
+        super(BayramogluetAl2015Model, self).__init__(input_shape)
 
     def build(self, input_shape):
         X_input = Input(input_shape)

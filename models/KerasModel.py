@@ -14,8 +14,12 @@ class KerasModel(object):
         adam = optimizers.adam()
         self.model.compile(optimizer=adam, loss="binary_crossentropy", metrics=["accuracy"])
 
-    def fit(self, x, y, epochs=10, batch_size=15):
-        self.model.fit(x=x, y=y, epochs=epochs, batch_size=batch_size)
+    def fit(self, x, y, epochs=10, batch_size=15, validation_data = None):
+        if validation_data is None:
+            return self.model.fit(x=x, y=y, epochs=epochs, batch_size=batch_size, verbose=0)
+        else:
+            return self.model.fit(x=x, y=y, epochs=epochs, batch_size=batch_size, validation_data=validation_data,
+                                  verbose=1)
 
     def evaluate(self, x, y):
         loss_acc = self.model.evaluate(x=x, y=y)

@@ -14,9 +14,9 @@ class TlResnet50(KerasModel):
         last_layer = tl_model.output
         X = GlobalAveragePooling2D()(last_layer)
         X = Dense(512, activation='relu')(X)
-        X = Dropout(0.5)(X)
+        X = Dropout(0.2)(X)
         X = Dense(256, activation='relu')(X)
-        X = Dropout(0.5)(X)
+        X = Dropout(0.2)(X)
         X = Dense(1, activation='sigmoid')(X)
 
         model = Model(inputs=tl_model.input, outputs=X)
