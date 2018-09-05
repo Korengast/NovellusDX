@@ -1,4 +1,5 @@
 from keras import optimizers
+import numpy as np
 
 
 class KerasModel(object):
@@ -26,7 +27,8 @@ class KerasModel(object):
         return loss_acc
 
     def predict(self, x):
-        preds = self.model.predict_classes(x=x)
+        pred_prob = self.model.predict(x=x)
+        preds = np.round(pred_prob)
         return preds
 
     def save_model_weights(self, name):

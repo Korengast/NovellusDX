@@ -1,6 +1,7 @@
 import numpy as np
 from models.BayramogluetAl2015Model import BayramogluetAl2015Model
 import shutil
+import pandas as pd
 
 EPOCHS = 50
 BATCH_SIZE = 30
@@ -24,11 +25,14 @@ X_test = np.load('array_data/' + RES + '_X_test.npy')
 test_file_names = np.load('array_data/' + RES + 'test_file_names.npy')
 
 predictions = model.predict(X_test)
-
+pred_classes = []
 for tfn, pred in zip(test_file_names, predictions):
     if pred == 1:
         shutil.copy2('DL_task/test/' + tfn, 'Predictions/MT')
+        pred_classes.append('MT')
     else:
         shutil.copy2('DL_task/test/' + tfn, 'Predictions/WT')
+        pred_classes.append('WT')
 
-
+pred_list = pd.DataFrame({'File': test_file_names, 'Class': pred_classes})
+pred_list.to_csv('Predictions/predictions.csv')
