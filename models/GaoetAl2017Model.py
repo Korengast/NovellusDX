@@ -11,13 +11,13 @@ class GaoetAl2017Model(KerasModel):
 
     def build(self, input_shape):
         X_input = Input(input_shape)
-        X = Conv2D(6, (7, 7), strides=(1, 1))(X_input)
+        X = Conv2D(6, (7, 7), strides=(1, 1), activation='relu')(X_input)  # Not tanh
         X = BatchNormalization(axis=3)(X)
         X = MaxPooling2D((2, 2))(X)
-        X = Conv2D(16, (4, 4), strides=(1, 1), activation='relu')(X)
+        X = Conv2D(16, (4, 4), strides=(1, 1), activation='relu')(X)  # Not tanh
         X = BatchNormalization(axis=3)(X)
         X = MaxPooling2D((3, 3))(X)
-        X = Conv2D(32, (3, 3), strides=(1, 1), activation='relu')(X)
+        X = Conv2D(32, (3, 3), strides=(1, 1), activation='relu')(X)  # Not tanh
         X = BatchNormalization(axis=3)(X)
         X = MaxPooling2D((3, 3))(X)
         X = Flatten()(X)

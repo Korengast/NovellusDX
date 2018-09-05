@@ -3,7 +3,10 @@ from PIL import Image
 from random import random
 import numpy as np
 from matplotlib import pyplot as plt
+
 plt.style.use('ggplot')
+
+############# Explore the data ##############
 
 MTs = []
 WTs = []
@@ -162,6 +165,8 @@ plt.xlabel('avg')
 plt.ylabel('MT')
 
 plt.show()
+
+############# Prepare the data ##############
 
 X_train = {'1920_no': [], '384_flip': [], '192_rotate': []}
 Y_train = {'1920_no': [], '384_flip': [], '192_rotate': []}
