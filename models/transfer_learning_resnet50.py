@@ -1,6 +1,5 @@
 from keras.applications.resnet50 import ResNet50
-from keras.layers import Dense, Flatten, GlobalAveragePooling2D, Dropout
-from keras.layers import Input
+from keras.layers import Dense, GlobalAveragePooling2D, Dropout
 from keras.models import Model
 from models.KerasModel import KerasModel
 

@@ -1,10 +1,8 @@
 from os import listdir
-import PIL
 from PIL import Image
 from random import random
 import numpy as np
-import matplotlib.pyplot as plt
-
+from matplotlib import pyplot as plt
 plt.style.use('ggplot')
 
 MTs = []
@@ -232,21 +230,17 @@ for res_aug in res_aug_maps.keys():
     np.save(res_aug + '_Y_valid', yvalid)
 
 X_test = {'1920': [], '384': [], '192': []}
-Y_test = {'1920': [], '384': [], '192': []}
+test_file_names = {'1920': [], '384': [], '192': []}
 for res in resolutions:
     for p in listdir('DL_task/test/'):
         img = Image.open('DL_task/test/' + p)
         img = img.convert('RGB')
         img = img.resize((res, res))
         X_test[str(res)].append(np.array(img))
-        if 'Block_1' in p:
-            Y_test[str(res)].append(1)
-        else:
-            Y_test[str(res)].append(0)
+        test_file_names[str(res)].append(p)
 
 for res in resolutions:
     xtest = np.array(X_test[str(res)])
-    ytest = np.array(Y_test[str(res)])
-    xtest = xtrain / 255.
+    xtest = xtest / 255.
     np.save(str(res) + '_X_test', xtest)
-    np.save(str(res) + '_Y_test', ytest)
+    np.save(str(res) + 'test_file_names', test_file_names[str(res)])

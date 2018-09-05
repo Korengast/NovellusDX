@@ -19,14 +19,14 @@ class KerasModel(object):
             return self.model.fit(x=x, y=y, epochs=epochs, batch_size=batch_size, verbose=0)
         else:
             return self.model.fit(x=x, y=y, epochs=epochs, batch_size=batch_size, validation_data=validation_data,
-                                  verbose=1)
+                                  verbose=0)
 
     def evaluate(self, x, y):
         loss_acc = self.model.evaluate(x=x, y=y)
         return loss_acc
 
     def predict(self, x):
-        preds = self.model.predict(x=x)
+        preds = self.model.predict_classes(x=x)
         return preds
 
     def save_model_weights(self, name):
